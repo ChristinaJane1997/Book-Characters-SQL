@@ -1,0 +1,45 @@
+CREATE TABLE characters (id INTEGER PRIMARY KEY AUTOINCREMENT, 
+name TEXT,
+partner_id INTEGER, 
+author TEXT,
+book TEXT);
+
+INSERT INTO characters 
+VALUES (1, "Aelin", 2, "S.J Mass", "Throne of glass");
+INSERT INTO characters 
+VALUES (2, "Rowan", 1, "S.J Mass", "Throne of glass");
+INSERT INTO characters 
+VALUES (3, "Feyre", 4, "S.J Mass", "A court of thornes and roses");
+INSERT INTO characters 
+VALUES (4, "Rys", 3, "S.J Mass", "A court of thornes and roses");
+INSERT INTO characters 
+VALUES (5, "Luella", 6, "Elise Kova", "A deal with the elf king");
+INSERT INTO characters 
+VALUES (6, "Elf King", 5, "Elise Kova", "A deal with the elf king");
+
+CREATE TABLE ability (id INTEGER PRIMARY KEY, skill TEXT, species TEXT);
+
+INSERT INTO ability 
+VALUES (1, "Fire", "Fae");
+INSERT INTO ability 
+VALUES (2, "Wind", "Fae");
+INSERT INTO ability 
+VALUES (3, "Shapeshifting", "High Fae");
+INSERT INTO ability 
+VALUES (4, "Darkness", "High Fae");
+INSERT INTO ability 
+VALUES (5, "Healing", "Human");
+INSERT INTO ability 
+VALUES (6, "Nature", "Elf");
+
+
+/*Query*/
+
+SELECT characters.name, ability.skill, buddy.name AS partner, bud.skill AS partner_skill
+FROM characters
+JOIN characters buddy
+ON characters.partner_id = buddy.id
+JOIN ability
+ON ability.id = characters.id
+JOIN ability bud
+ON bud.id = characters.partner_id;
